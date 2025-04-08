@@ -180,124 +180,178 @@
     <script>
         // CSV data will be transformed into JSON and inserted here
         const coursesData = [
-    {
-        "title": "Капсульный гардероб качества люкс",
-        "link": "https://bespoked.ru/shop/courses/kapsulnyj-garderob/",
-        "price": "59900",
-        "lessons": "300",
-        "duration": "20 часов",
-        "access": "навсегда",
-        "comment": ""
-    },
-    {
-        "title": "Modest fashion",
-        "link": "https://bespoked.ru/shop/courses/modest-fashion/",
-        "price": "9900",
-        "lessons": "95",
-        "duration": "",
-        "access": "",
-        "comment": "в основном платья"
-    },
-    {
-        "title": "Онлайн-курс кройки и шитья",
-        "link": "https://irs.academy/sewing",
-        "price": "51200",
-        "lessons": "12",
-        "duration": "36 часов",
-        "access": "",
-        "comment": ""
-    },
-    {
-        "title": "Онлайн-курс \"Начинающий портной\"",
-        "link": "https://academiashitia.ru/ek_details",
-        "price": "29900",
-        "lessons": "130",
-        "duration": "1 год",
-        "access": "2 года",
-        "comment": "можно взять отдельно курс трикотажа, это дешевле"
-    },
-    {
-        "title": "Онлайн-курс \"Сшей свое платье\"",
-        "link": "https://sewschool.tilda.ws/dress",
-        "price": "24900",
-        "lessons": "",
-        "duration": "4 недели",
-        "access": "3 года",
-        "comment": "особенности раюоты с различными материалами"
-    },
-    {
-        "title": "онлайн курс базовый гардероб",
-        "link": "https://loskutspace.com/base",
-        "price": "17990",
-        "lessons": "104",
-        "duration": "3 месяца",
-        "access": "1 год",
-        "comment": "можно взять курс с бельем. обойдется в 26590, есть пробный урок"
-    },
-    {
-        "title": "Онлайн-курс по шитью на любую фигуру",
-        "link": "https://balanovskaya.ru/",
-        "price": "48600",
-        "lessons": "",
-        "duration": "1 год",
-        "access": "навсегда",
-        "comment": "огромный курс зато все по полочкам и постепенно, в любом темпе можно, довольно актуальные фасоны. Можно сперва пройти бесплатный марафон"
-    },
-    {
-        "title": "sew family швейный клуб",
-        "link": "https://sewfamily.ru/club_pre_recording",
-        "price": "24900",
-        "lessons": "200",
-        "duration": "",
-        "access": "1 год",
-        "comment": ""
-    },
-    {
-        "title": "selftailor швейный клуб",
-        "link": "https://selftailor.online/page_course/30",
-        "price": "11900",
-        "lessons": "10",
-        "duration": "",
-        "access": "1 год",
-        "comment": "каждый месяц новая тема появляется и по ней открывается 4 урока, можно оформить подписку на месяц за 1900, довольно актуальные модели. Можно купить отдельно урок с понравившимся изделием"
-    },
-    {
-        "title": "vikisews",
-        "link": "https://vikisews.com/kursy/",
-        "price": "По запросу",
-        "lessons": "",
-        "duration": "",
-        "access": "навсегда",
-        "comment": "классные актуальные модели, но ты покупаешь выкройку ОДНОГО КОНКРЕТНОГО размера"
-    },
-    {
-        "title": "хочу шить",
-        "link": "https://wanttosew.ru/online/raspisanie/",
-        "price": "По запросу",
-        "lessons": "",
-        "duration": "",
-        "access": "",
-        "comment": "здесь представлены различные курсы, в том числе корсет"
-    },
-    {
-        "title": "Курс «Построение трикотажного костюма в программе Valentina»",
-        "link": "https://courseburg.ru/kurs_postroenie_trikotajnogo_kostuma_v_programme_valentina-c8358-l0.html",
-        "price": "7000",
-        "lessons": "12",
-        "duration": "",
-        "access": "",
-        "comment": "работа в программе"
-    },
-    {
-        "title": "Онлайн-курс «Полный Fashion от А до Я»",
-        "link": "https://courseburg.ru/onlayn_kurs_polnyy_fashion_ot_a_do_ya-c3813-l0.html",
-        "price": "25900",
-        "lessons": "9",
-        "duration": "45 часов",
-        "access": "",
-        "comment": "мало информации, курс индивидуальный"
-    }
-];
+            {
+                "title": "Капсульный гардероб качества люкс",
+                "link": "https://bespoked.ru/shop/courses/kapsulnyj-garderob/",
+                "price": "59900",
+                "lessons": "300",
+                "duration": "20 часов",
+                "access": "навсегда",
+                "comment": ""
+            },
+            {
+                "title": "Modest fashion",
+                "link": "https://bespoked.ru/shop/courses/modest-fashion/",
+                "price": "9900",
+                "lessons": "95",
+                "duration": "",
+                "access": "",
+                "comment": "в основном платья"
+            },
+            {
+                "title": "Онлайн-курс кройки и шитья",
+                "link": "https://irs.academy/sewing",
+                "price": "51200",
+                "lessons": "12",
+                "duration": "36 часов",
+                "access": "",
+                "comment": ""
+            },
+            {
+                "title": "Онлайн-курс \"Начинающий портной\"",
+                "link": "https://academiashitia.ru/ek_details",
+                "price": "29900",
+                "lessons": "130",
+                "duration": "1 год",
+                "access": "2 года",
+                "comment": "можно взять отдельно курс трикотажа, это дешевле"
+            },
+            {
+                "title": "Онлайн-курс \"Сшей свое платье\"",
+                "link": "https://sewschool.tilda.ws/dress",
+                "price": "24900",
+                "lessons": "",
+                "duration": "4 недели",
+                "access": "3 года",
+                "comment": "особенности раюоты с различными материалами"
+            },
+            {
+                "title": "онлайн курс базовый гардероб",
+                "link": "https://loskutspace.com/base",
+                "price": "17990",
+                "lessons": "104",
+                "duration": "3 месяца",
+                "access": "1 год",
+                "comment": "можно взять курс с бельем. обойдется в 26590, есть пробный урок"
+            },
+            {
+                "title": "Онлайн-курс по шитью на любую фигуру",
+                "link": "https://balanovskaya.ru/",
+                "price": "48600",
+                "lessons": "",
+                "duration": "1 год",
+                "access": "навсегда",
+                "comment": "огромный курс зато все по полочкам и постепенно, в любом темпе можно, довольно актуальные фасоны. Можно сперва пройти бесплатный марафон"
+            },
+            {
+                "title": "sew family швейный клуб",
+                "link": "https://sewfamily.ru/club_pre_recording",
+                "price": "24900",
+                "lessons": "200",
+                "duration": "",
+                "access": "1 год",
+                "comment": ""
+            },
+            {
+                "title": "selftailor швейный клуб",
+                "link": "https://selftailor.online/page_course/30",
+                "price": "11900",
+                "lessons": "10",
+                "duration": "",
+                "access": "1 год",
+                "comment": "каждый месяц новая тема появляется и по ней открывается 4 урока, можно оформить подписку на месяц за 1900, довольно актуальные модели. Можно купить отдельно урок с понравившимся изделием"
+            },
+            {
+                "title": "vikisews",
+                "link": "https://vikisews.com/kursy/",
+                "price": "По запросу",
+                "lessons": "",
+                "duration": "",
+                "access": "навсегда",
+                "comment": "классные актуальные модели, но ты покупаешь выкройку ОДНОГО КОНКРЕТНОГО размера"
+            },
+            {
+                "title": "хочу шить",
+                "link": "https://wanttosew.ru/online/raspisanie/",
+                "price": "По запросу",
+                "lessons": "",
+                "duration": "",
+                "access": "",
+                "comment": "здесь представлены различные курсы, в том числе корсет"
+            },
+            {
+                "title": "Курс «Построение трикотажного костюма в программе Valentina»",
+                "link": "https://courseburg.ru/kurs_postroenie_trikotajnogo_kostuma_v_programme_valentina-c8358-l0.html",
+                "price": "7000",
+                "lessons": "12",
+                "duration": "",
+                "access": "",
+                "comment": "работа в программе"
+            },
+            {
+                "title": "Онлайн-курс «Полный Fashion от А до Я»",
+                "link": "https://courseburg.ru/onlayn_kurs_polnyy_fashion_ot_a_do_ya-c3813-l0.html",
+                "price": "25900",
+                "lessons": "9",
+                "duration": "45 часов",
+                "access": "",
+                "comment": "мало информации, курс индивидуальный"
+            },
+            {
+                "title": "Курс: \"БАЗОВЫЙ c 0\" конструирование, раскрой и пошив одежды на любые фигуры для начинающих",
+                "link": "https://zofklekalo.ru/courses/tproduct/570255949-791652648501-kurs-bazovii-c-0-konstruirovanie-raskroi",
+                "price": "18990",
+                "lessons": "30",
+                "duration": "3 месяца",
+                "access": "",
+                "comment": "это прям профессия, есть скидки"
+            },
+            {
+                "title": "Портной.4 разряда",
+                "link": "https://zofklekalo.ru/courses/tproduct/570255949-502227544511-kurs-portnoi4-razryada-135-akchasov-3-4",
+                "price": "30396",
+                "lessons": "135",
+                "duration": "3 месяца",
+                "access": "",
+                "comment": "это прям профессия, есть скидки"
+            },
+            {
+                "title": "Азбука шитья",
+                "link": "https://grasserschool.ru/courses/tekhnologiya-poshiva/azbuka-shitya/",
+                "price": "11900",
+                "lessons": "",
+                "duration": "2 месяца",
+                "access": "8 месяцев",
+                "comment": "довольно много инфы для совсем неопытных"
+            },
+            {
+                "title": "Базовый курс по конструированию, моделированию и пошиву одежды",
+                "link": "https://grasserschool.ru/courses/konstruirovanie-modelirovanie-i-poshiv/bazovyy-kurs/",
+                "price": "31900",
+                "lessons": "",
+                "duration": "4 месяца",
+                "access": "10 месяцев",
+                "comment": ""
+            },
+            {
+                "title": "Пошив изделий из трикотажа",
+                "link": "https://grasserschool.ru/courses/konstruirovanie-modelirovanie-i-poshiv/trikotazh/",
+                "price": "27980",
+                "lessons": "",
+                "duration": "4 месяца",
+                "access": "10 месяцев",
+                "comment": ""
+            },
+            {
+                "title": "онлайн-академия конструирования и технологии создания одежды",
+                "link": "https://aronfactoryschool.com/",
+                "price": "По запросу",
+                "lessons": "",
+                "duration": "",
+                "access": "",
+                "comment": "есть два основных курса - трикотаж и костюм. Научитесь с нуля создавать костюмы премиального качества и сажать их за 1-2 примерки по авторскому упрощенному методу Арон"
+            }
+        ];
 
         function getCommentDecorations(comment) {
             if (!comment) return { emoji: '', backgroundImage: '' };
