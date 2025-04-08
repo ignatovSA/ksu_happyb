@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎁 С Днем Рождения! Подборка курсов шитья</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary-color: #ff69b4;
@@ -26,6 +27,8 @@
             text-align: center;
             padding: 3rem 1rem;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .container {
@@ -91,11 +94,42 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .celebrate-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .celebrate-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🎁 С Днем Рождения!</h1>
+        <h1 class="floating">🎁 С Днем Рождения!</h1>
         <p>Специально для тебя мы подготовили подборку лучших курсов по шитью</p>
     </div>
 
@@ -104,6 +138,8 @@
             <!-- Courses will be inserted here by JavaScript -->
         </div>
     </div>
+
+    <button class="celebrate-button" onclick="celebrate()">🎉</button>
 
     <footer class="footer">
         <p>С любовью ❤️ от твоих друзей</p>
@@ -254,6 +290,88 @@
 
         // Initialize the display when the page loads
         window.onload = displayCourses;
+
+        function celebrate() {
+            // Fire multiple confetti bursts
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 }
+            };
+
+            function fire(particleRatio, opts) {
+                confetti({
+                    ...defaults,
+                    ...opts,
+                    particleCount: Math.floor(count * particleRatio)
+                });
+            }
+
+            // Colorful confetti burst
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
+
+            // Add firework effect after a short delay
+            setTimeout(() => {
+                const duration = 5 * 1000;
+                const animationEnd = Date.now() + duration;
+                const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                const interval = setInterval(function() {
+                    const timeLeft = animationEnd - Date.now();
+
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+
+                    const particleCount = 50 * (timeLeft / duration);
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: {
+                            x: randomInRange(0.1, 0.3),
+                            y: Math.random() - 0.2
+                        }
+                    });
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: {
+                            x: randomInRange(0.7, 0.9),
+                            y: Math.random() - 0.2
+                        }
+                    });
+                }, 250);
+            }, 1000);
+        }
+
+        // Auto-celebrate on page load
+        window.addEventListener('load', () => {
+            setTimeout(celebrate, 1000);
+        });
     </script>
 </body>
 </html>
