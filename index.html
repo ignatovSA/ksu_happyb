@@ -50,6 +50,22 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: top right;
+            pointer-events: none;
         }
 
         .course-card:hover {
@@ -124,6 +140,22 @@
 
         .floating {
             animation: float 3s ease-in-out infinite;
+        }
+
+        .comment-emoji {
+            font-size: 1.5em;
+            margin-right: 0.5em;
+            vertical-align: middle;
+        }
+
+        .course-comment {
+            display: flex;
+            align-items: start;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -267,15 +299,90 @@
     }
 ];
 
+        function getCommentDecorations(comment) {
+            if (!comment) return { emoji: '', backgroundImage: '' };
+
+            const commentLower = comment.toLowerCase();
+            
+            // Define patterns and their corresponding decorations
+            const patterns = [
+                {
+                    keywords: ['платье', 'платья'],
+                    emoji: '👗',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY2OWI0IiBkPSJNMzIwIDMyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyIDAgNjQgMHptLTk2IDBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzIgMCA2NCAwem0tNjQgNjRoMjI0YzE3LjcgMCAzMiAxNC4zIDMyIDMydjMyMGMwIDE3LjctMTQuMyAzMi0zMiAzMkgxNjBjLTE3LjcgMC0zMi0xNC4zLTMyLTMyVjEyOGMwLTE3LjcgMTQuMy0zMiAzMi0zMnoiLz48L3N2Zz4='
+                },
+                {
+                    keywords: ['трикотаж'],
+                    emoji: '🧶',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY2OWI0IiBkPSJNMzY4IDMyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyIDAgNjQgMHptLTk2IDBjMCAxNy43LTE0LjMgMzItMzIgMzJzLTMyLTE0LjMtMzItMzIgMzIgMCA2NCAwem0tOTYgMGMwIDE3LjctMTQuMyAzMi0zMiAzMnMtMzItMTQuLjMtMzItMzIgMzIgMCA2NCAweiIvPjwvc3ZnPg=='
+                },
+                {
+                    keywords: ['белье'],
+                    emoji: '👙',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY2OWI0IiBkPSJNMzIwIDMyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyIDAgNjQgMHoiLz48L3N2Zz4='
+                },
+                {
+                    keywords: ['корсет'],
+                    emoji: '👒',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY2OWI0IiBkPSJNMzIwIDMyYzAgMTcuNy0xNC4zIDMyLTMyIDMycy0zMi0xNC4zLTMyLTMyIDMyIDAgNjQgMHoiLz48L3N2Zz4='
+                },
+                {
+                    keywords: ['марафон', 'пробный'],
+                    emoji: '🎯',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY2OWI0IiBkPSJNNTEyIDI1NmMwIDE0MS4zLTExNC43IDI1Ni0yNTYgMjU2UzAgMzk3LjMgMCAyNTYgMTE0LjcgMCAyNTYgMHMyNTYgMTE0LjcgMjU2IDI1NnpNMjU2IDQ4YzExLjcgMCAyMS4zIDkuNyAyMS4zIDIxLjNzLTkuNyAyMS4zLTIxLjMgMjEuMy0yMS4zLTkuNy0yMS4zLTIxLjNTMjQ0LjMgNDggMjU2IDQ4eiIvPjwvc3ZnPg=='
+                },
+                {
+                    keywords: ['один', 'конкретн'],
+                    emoji: '😕',
+                    image: ''
+                },
+                {
+                    keywords: ['огромный', 'все по полочкам'],
+                    emoji: '📚',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmY2OWI0IiBkPSJNNDQ4IDM2MGMwIDIyLjItMTcuOCA0MC00MCA0MGgtMzA0Yy0yMi4yIDAtNDAtMTcuOC00MC00MFY4OGMwLTIyLjIgMTcuOC00MCA0MC00MGgzMDRjMjIuMiAwIDQwIDE3LjggNDAgNDB2MjcyeiIvPjwvc3ZnPg=='
+                },
+                {
+                    keywords: ['мало информации'],
+                    emoji: '❓',
+                    image: ''
+                },
+                {
+                    keywords: ['актуальные'],
+                    emoji: '✨',
+                    image: ''
+                }
+            ];
+
+            // Find matching pattern
+            for (const pattern of patterns) {
+                if (pattern.keywords.some(keyword => commentLower.includes(keyword))) {
+                    return {
+                        emoji: pattern.emoji,
+                        backgroundImage: pattern.image
+                    };
+                }
+            }
+
+            return { emoji: '💡', backgroundImage: '' }; // Default decoration
+        }
+
         function createCourseCard(course) {
+            const { emoji, backgroundImage } = getCommentDecorations(course.comment);
+            const cardStyle = backgroundImage ? `style="--bg-image: url('${backgroundImage}')"` : '';
+
             return `
-                <div class="course-card">
+                <div class="course-card" ${cardStyle}>
                     <h3 class="course-title">${course.title}</h3>
                     <p class="course-price">Цена: ${course.price} ₽</p>
                     ${course.lessons ? `<p>Количество уроков: ${course.lessons}</p>` : ''}
                     ${course.duration ? `<p>Длительность: ${course.duration}</p>` : ''}
                     ${course.access ? `<p>Доступ: ${course.access}</p>` : ''}
-                    ${course.comment ? `<p>${course.comment}</p>` : ''}
+                    ${course.comment ? `
+                        <div class="course-comment">
+                            <span class="comment-emoji">${emoji}</span>
+                            <span>${course.comment}</span>
+                        </div>
+                    ` : ''}
                     <a href="${course.link}" target="_blank" class="course-link">Подробнее о курсе</a>
                 </div>
             `;
