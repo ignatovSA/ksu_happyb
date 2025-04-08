@@ -528,6 +528,7 @@
         function createCourseCard(course) {
             const { emoji, backgroundImage } = getCommentDecorations(course.comment);
             const cardStyle = backgroundImage ? `style="--bg-image: url('${backgroundImage}')"` : '';
+            const domain = new URL(course.link).hostname;
 
             return `
                 <div class="course-card" ${cardStyle}>
@@ -543,6 +544,7 @@
                         </div>
                     ` : ''}
                     <a href="${course.link}" target="_blank" class="course-link">Подробнее о курсе</a>
+                    <a href="${course.link}" target="_blank" style="display: block; color: grey; font-size: 0.8rem; margin-top: 0.5rem;">${domain}</a>
                 </div>
             `;
         }
