@@ -23,12 +23,57 @@
 
         .header {
             background-color: var(--primary-color);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Cpath d='M50 0c27.614 0 50 22.386 50 50S77.614 100 50 100 0 77.614 0 50 22.386 0 50 0zm0 10c22.091 0 40 17.909 40 40S72.091 90 50 90 10 72.091 10 50s17.909-40 40-40zm0 10c16.569 0 30 13.431 30 30S66.569 80 50 80 20 66.569 20 50s13.431-30 30-30z'/%3E%3C/g%3E%3C/svg%3E"),
+                            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M30 0l30 30-30 30L0 30z M10 30l20-20 20 20-20 20z'/%3E%3C/g%3E%3C/svg%3E"),
+                            linear-gradient(45deg, rgba(255, 105, 180, 0.95) 0%, rgba(255, 20, 147, 0.9) 100%);
+            background-position: center, center;
+            background-size: 100px, 60px;
+            background-repeat: repeat, repeat;
+            background-blend-mode: soft-light;
             color: white;
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+            min-height: 300px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M9 0h2v20H9V0zm25 0h2v20h-2V0zM9 77h2v20H9V77zm25 0h2v20h-2V77zm-13 0h2v20h-2V77zM9 97h2v20H9V97zm25 0h2v20h-2V97zm-13 0h2v20h-2V97zM9 117h2v20H9v-20zm25 0h2v20h-2v-20zm-13 0h2v20h-2v-20z'/%3E%3C/svg%3E");
+            opacity: 0.15;
+            z-index: 1;
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            from { background-position: 0 0; }
+            to { background-position: 0 120px; }
+        }
+
+        .header h1, .header p {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
         }
 
         .container {
@@ -157,10 +202,70 @@
             border-radius: 8px;
             font-style: italic;
         }
+
+        .polaroid-sticker {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: rotate(20deg) translateY(-50%);
+            background: white;
+            padding: 15px 15px 50px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            z-index: 3;
+            transition: transform 0.3s ease;
+            max-width: 200px;
+        }
+
+        .polaroid-sticker:hover {
+            transform: rotate(20deg) translateY(-50%) scale(1.05);
+        }
+
+        .polaroid-sticker img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+        }
+
+        .polaroid-sticker::after {
+            content: '✨ Happy Birthday! ✨';
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            color: #333;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .polaroid-sticker {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: rotate(20deg);
+                margin: 20px auto;
+                width: fit-content;
+                max-width: 160px;
+            }
+            
+            .polaroid-sticker:hover {
+                transform: rotate(20deg) scale(1.05);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
+        <div class="polaroid-sticker">
+            <img src="stickers/portrait.jpg" alt="Birthday Portrait">
+        </div>
+        <div class="polaroid-sticker" style="left: 10%; top: 60%; transform: rotate(-15deg) translateY(-50%);">
+            <img src="stickers/portrait2.jpg" alt="Birthday Portrait 2">
+        </div>
         <h1 class="floating">🎁 С Днем Рождения!</h1>
         <p>Специально для тебя мы подготовили подборку лучших курсов по шитью</p>
     </div>
